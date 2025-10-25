@@ -7,8 +7,10 @@ class Queue {
     public: 
         Node* front;
         Node* tail;
+        int size;
 
         Queue() {
+            size = 0;
             this->front = this->tail = nullptr;
         }
 
@@ -17,13 +19,44 @@ class Queue {
         }
 
         int size() {
-            int i;
-            Node* current;
-            for (i = 0, current = this->front; current != nullptr; i ++, current = current->previousNode);
-            return i;
+            return this->size;
         }
 
-        void enqueue() {
-                      
+        Node* front() {
+            return this->front;
+        }
+
+        Node* tail() {
+            return this->tail;g
+        }
+
+        void enqueue(Data data) {
+            Node* new_node = new Node(data);
+            if (this->front == nullptr) {
+                this->front = this->tail = new_node;
+                this->size ++;
+                return;
+            }
+
+            this->tail->previousNode = new_node;
+            this->tail = new_node;
+            this->size ++;
+        }
+
+        Node* dequeue() {
+            if (this->tail == nullptr) {
+                cout << "The queue is empty\n";
+                return nullptr;
+            }
+
+            Node* temp = this->front;
+            this->front = this->front->previousNode;
+            
+            if (this->front == nullptr) {
+                this->tail = this->front;
+            }
+
+            this->size --;
+            return temp;
         }
 };

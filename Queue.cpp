@@ -27,7 +27,7 @@ class Queue {
         }
 
         Node* tail() {
-            return this->tail;g
+            return this->tail;
         }
 
         void enqueue(Data data) {
